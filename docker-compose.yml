@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  mysqldb:
+    image: "mysql:8.0.29"
+    restart: always
+    ports:
+      - 3309:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: todos
+      MYSQL_USER: sa
+      MYSQL_PASSWORD: 123456
+  app:
+    working_dir: /code
+    restart: always
+    image: springbootmysql
+    command:
+      - mkdir /code
+    ports:
+      - 9999:8088
+    volumes:
+      - C:\Users\vdhop\Desktop\spring-docker:/code
+    depends_on:
+      -  mysqldb
